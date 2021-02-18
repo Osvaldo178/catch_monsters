@@ -102,11 +102,11 @@ var render = function () {
   ctx.fillText("Time: " + count, 20, 50);
   // Display game over message when timer finished
   if(finished==true){
-    ctx.fillText("Game over!", 200, 220);
+    ctx.fillText("You Lost Lol", 200, 220);
   }
   
 };
-var count = 30; // how many seconds the game lasts for - default 30
+var count = 50; // how many seconds the game lasts for - default 30
 var finished = false;
 var counter =function(){
   count=count-1; // countown by 1 every second
