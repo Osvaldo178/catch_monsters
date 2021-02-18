@@ -35,7 +35,7 @@ monsterImage.onload = function () {
 monsterImage.src = "images/monster.png";
 // Create the game objects
 var hero = {
-  speed: 256 // movement speed of hero in pixels per second
+  speed: 270 // movement speed of hero in pixels per second
 };
 var monster = {};
 var monstersCaught = 0;
@@ -102,11 +102,11 @@ var render = function () {
   ctx.fillText("Time: " + count, 20, 50);
   // Display game over message when timer finished
   if(finished==true){
-    ctx.fillText("You Lost Lol", 200, 220);
+    ctx.fillText("You Failed", 200, 220);
   }
   
 };
-var count = 50; // how many seconds the game lasts for - default 30
+var count = 10; // how many seconds the game lasts for - default 30
 var finished = false;
 var counter =function(){
   count=count-1; // countown by 1 every second
