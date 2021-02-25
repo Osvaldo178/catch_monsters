@@ -35,7 +35,7 @@ monsterImage.onload = function () {
 monsterImage.src = "images/monster.png";
 // Create the game objects
 var hero = {
-  speed: 270 // movement speed of hero in pixels per second
+  speed: 256 // movement speed of hero in pixels per second
 };
 var monster = {};
 var monstersCaught = 0;
@@ -59,18 +59,37 @@ var reset = function () {
 };
 // Update game objects - change player position based on key pressed
 var update = function (modifier) {
+  
+  
   if (38 in keysDown) { // Player is holding up key
-    hero.y -= hero.speed * modifier;
-  }
-  if (40 in keysDown) { // Player is holding down key
-    hero.y += hero.speed * modifier;
-  }
-  if (37 in keysDown) { // Player is holding left key
-    hero.x -= hero.speed * modifier;
-  }
-  if (39 in keysDown) { // Player is holding right key
-    hero.x += hero.speed * modifier;
-  }
+   new_position =  hero.y - (hero.speed * modifier);
+    if (new_position > 0) {
+        hero.y = new_position;
+    }
+}
+
+if (40 in keysDown) { // Player is holding down key
+    new_position =  hero.y + (hero.speed * modifier);
+    if (new_position < 480) {
+        hero.y = new_position;
+    }
+}
+
+if (37 in keysDown) { // Player is holding left key
+    new_position =  hero.x - (hero.speed * modifier);
+    if (new_position > 0) {
+        hero.x = new_position;
+    }
+}
+
+if (39 in keysDown) { // Player is holding right key
+    new_position =  hero.x + (hero.speed * modifier);
+    if (new_position < 512) {
+        hero.x = new_position;
+    }
+}
+
+
   // Check if player and monster collider
   if (
     hero.x <= (monster.x + 32)
@@ -102,11 +121,11 @@ var render = function () {
   ctx.fillText("Time: " + count, 20, 50);
   // Display game over message when timer finished
   if(finished==true){
-    ctx.fillText("You Failed", 200, 220);
+    ctx.fillText("Game over!", 200, 220);
   }
   
 };
-var count = 10; // how many seconds the game lasts for - default 30
+var count = 30; // how many seconds the game lasts for - default 30
 var finished = false;
 var counter =function(){
   count=count-1; // countown by 1 every second
@@ -139,5 +158,7 @@ var main = function () {
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 // Let's play this game!
+
+
 reset();
 main();
