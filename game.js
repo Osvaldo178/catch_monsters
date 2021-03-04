@@ -35,7 +35,9 @@ monsterImage.onload = function () {
 monsterImage.src = "images/monster.png";
 // Create the game objects
 var hero = {
-  speed: 256 // movement speed of hero in pixels per second
+  speed: 256, // movement speed of hero in pixels per second
+  height: 36,
+  width: 31
 };
 var monster = {};
 var monstersCaught = 0;
@@ -51,8 +53,8 @@ addEventListener("keyup", function (key) {
 // Reset the player and monster positions when player catches a monster
 var reset = function () {
   // Reset player's position to centre of canvas
-  hero.x = canvas.width / 2;
-  hero.y = canvas.height / 2;
+  hero.x = canvas.width /2;
+  hero.y = canvas.height /2 ;
   // Place the monster somewhere on the canvas randomly
   monster.x = 32 + (Math.random() * (canvas.width - 64));
   monster.y = 32 + (Math.random() * (canvas.height - 64));
@@ -70,7 +72,9 @@ var update = function (modifier) {
 
 if (40 in keysDown) { // Player is holding down key
     new_position =  hero.y + (hero.speed * modifier);
-    if (new_position < 480) {
+    console.log(new_position)
+    console.log(hero.height)
+    if (new_position < (canvas.height - hero.height)) {
         hero.y = new_position;
     }
 }
@@ -84,7 +88,9 @@ if (37 in keysDown) { // Player is holding left key
 
 if (39 in keysDown) { // Player is holding right key
     new_position =  hero.x + (hero.speed * modifier);
-    if (new_position < 512) {
+    console.log(new_position)
+    console.log(hero.width)
+    if (new_position < (canvas.width - hero.width)) {
         hero.x = new_position;
     }
 }
