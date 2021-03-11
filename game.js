@@ -126,9 +126,11 @@ if (39 in keysDown) { // Player is holding right key
     ++monstersCaught;
   }
 
-  if (monstersCaught == 2) {
-     reset();
-}
+   if ((monster1Ready == false) && (monster2Ready == false)) {
+    monster1Ready = true;
+    monster2Ready = true;
+    reset();
+  }
 
 };
 // Draw everything on the canvas
