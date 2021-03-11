@@ -25,21 +25,33 @@ heroImage.onload = function () {
   heroReady = true;
 };
 heroImage.src = "images/hero.png";
+
 // Load the monster image
-var monsterReady = false;
-var monsterImage = new Image();
-monsterImage.onload = function () {
+var monster1Ready = false;
+var monster1Image = new Image();
+monster1Image.onload = function () {
   // show the monster image
-  monsterReady = true;
+  monster1Ready = true;
 };
-monsterImage.src = "images/monster.png";
+monster1Image.src = "images/monster.png";
+
+var monster2Ready = false;
+var monster2Image = new Image();
+monster2Image.onload = function () {
+  // show the monster image
+  monster2Ready = true;
+};
+monster2Image.src = "images/monster.png";
+
 // Create the game objects
 var hero = {
   speed: 256, // movement speed of hero in pixels per second
   height: 36,
   width: 31
 };
-var monster = {};
+var monster1 = {};
+var monster2 = {};
+
 var monstersCaught = 0;
 // Handle keyboard controls
 var keysDown = {};
@@ -56,20 +68,22 @@ var reset = function () {
   hero.x = canvas.width /2;
   hero.y = canvas.height /2 ;
   // Place the monster somewhere on the canvas randomly
-  monster.x = 32 + (Math.random() * (canvas.width - 64));
-  monster.y = 32 + (Math.random() * (canvas.height - 64));
+  
+  monster1.x = 32 + (Math.random() * (canvas.width - 64));
+  monster1.y = 32 + (Math.random() * (canvas.height - 64));
+  
+  monster2.x = 32 + (Math.random() * (canvas.width - 64));
+  monster2.y = 32 + (Math.random() * (canvas.height - 64));
 };
+
 // Update game objects - change player position based on key pressed
 var update = function (modifier) {
-  
-  
   if (38 in keysDown) { // Player is holding up key
    new_position =  hero.y - (hero.speed * modifier);
     if (new_position > 0) {
         hero.y = new_position;
     }
 }
-
 if (40 in keysDown) { // Player is holding down key
     new_position =  hero.y + (hero.speed * modifier);
     console.log(new_position)
@@ -78,14 +92,12 @@ if (40 in keysDown) { // Player is holding down key
         hero.y = new_position;
     }
 }
-
 if (37 in keysDown) { // Player is holding left key
     new_position =  hero.x - (hero.speed * modifier);
     if (new_position > 0) {
         hero.x = new_position;
     }
 }
-
 if (39 in keysDown) { // Player is holding right key
     new_position =  hero.x + (hero.speed * modifier);
     console.log(new_position)
@@ -94,18 +106,32 @@ if (39 in keysDown) { // Player is holding right key
         hero.x = new_position;
     }
 }
-
-
   // Check if player and monster collider
   if (
-    hero.x <= (monster.x + 32)
-    && monster.x <= (hero.x + 32)
-    && hero.y <= (monster.y + 32)
-    && monster.y <= (hero.y + 32)
+    hero.x <= (monster1.x + 32)
+    && monster1.x <= (hero.x + 32)
+    && hero.y <= (monster1.y + 32)
+    && monster1.y <= (hero.y + 32)
   ) {
     ++monstersCaught;
+
+  }
+ if (
+    hero.x <= (monster2.x + 32)
+    && monster2.x <= (hero.x + 32)
+    && hero.y <= (monster2.y + 32)
+    && monster2.y <= (hero.y + 32)
+  ) {
+
+    ++monstersCaught;
+  }
+
+   if ((monster1Ready == false) && (monster2Ready == false)) {
+    monster1Ready = true;
+    monster2Ready = true;
     reset();
   }
+
 };
 // Draw everything on the canvas
 var render = function () {
@@ -115,10 +141,14 @@ var render = function () {
   if (heroReady) {
     ctx.drawImage(heroImage, hero.x, hero.y);
   }
-  if (monsterReady) {
-    ctx.drawImage(monsterImage, monster.x, monster.y);
+  if (monster1Ready) {
+    ctx.drawImage(monster1Image, monster1.x, monster1.y);
   }
-  // Display score and time 
+  if (monster2Ready) {
+    ctx.drawImage(monster2Image, monster2.x, monster2.y);
+  }
+ 
+  // Display score and time
   ctx.fillStyle = "rgb(250, 250, 250)";
   ctx.font = "24px Helvetica";
   ctx.textAlign = "left";
@@ -129,7 +159,6 @@ var render = function () {
   if(finished==true){
     ctx.fillText("Game over!", 200, 220);
   }
-  
 };
 var count = 30; // how many seconds the game lasts for - default 30
 var finished = false;
@@ -145,7 +174,8 @@ var counter =function(){
        finished = true;
        count=0;
        // hider monster and hero
-       monsterReady=false;
+       monster1Ready=false;
+       monster2Ready=false;
        heroReady=false;
     }
 }
@@ -164,7 +194,5 @@ var main = function () {
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 // Let's play this game!
-
-
 reset();
 main();
