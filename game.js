@@ -52,7 +52,6 @@ var hero = {
 var monster1 = {};
 var monster2 = {};
 
-var monster = {}
 var monstersCaught = 0;
 // Handle keyboard controls
 var keysDown = {};
@@ -109,11 +108,23 @@ if (39 in keysDown) { // Player is holding right key
 }
   // Check if player and monster collider
   if (
-    hero.x <= (monster.x + 32)
-    && monster.x <= (hero.x + 32)
-    && hero.y <= (monster.y + 32)
-    && monster.y <= (hero.y + 32)
+    hero.x <= (monster1.x + 32)
+    && monster1.x <= (hero.x + 32)
+    && hero.y <= (monster1.y + 32)
+    && monster1.y <= (hero.y + 32)
   ) {
+    
+    ++monstersCaught;
+    reset();
+  }
+
+ if (
+    hero.x <= (monster2.x + 32)
+    && monster2.x <= (hero.x + 32)
+    && hero.y <= (monster2.y + 32)
+    && monster2.y <= (hero.y + 32)
+  ) {
+    
     ++monstersCaught;
     reset();
   }
@@ -171,7 +182,7 @@ var main = function () {
   // run the update function
   update(0.02); // do not change
   // run the render function
-  render ();
+  render();
   // Request to do this again ASAP
   requestAnimationFrame(main);
 };
