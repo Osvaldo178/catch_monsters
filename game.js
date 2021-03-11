@@ -122,11 +122,14 @@ if (39 in keysDown) { // Player is holding right key
     && hero.y <= (monster2.y + 32)
     && monster2.y <= (hero.y + 32)
   ) {
+
+    ++monstersCaught;
+  }
+
   if (monstersCaught == 2) {
      reset();
 }
-    ++monstersCaught;
-  }
+
 };
 // Draw everything on the canvas
 var render = function () {
