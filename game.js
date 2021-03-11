@@ -42,16 +42,18 @@ monster2Image.onload = function () {
   monster2Ready = true;
 };
 monster2Image.src = "images/monster.png";
-var monstersCaught = 2;
+
 // Create the game objects
 var hero = {
   speed: 256, // movement speed of hero in pixels per second
   height: 36,
   width: 31
 };
+var monster1 = {};
+var monster2 = {};
 
-var monster = {};
-var monstersCaught = 1;
+var monster = {}
+var monstersCaught = 0;
 // Handle keyboard controls
 var keysDown = {};
 // Check for keys pressed where key represents the keycode captured
@@ -67,9 +69,14 @@ var reset = function () {
   hero.x = canvas.width /2;
   hero.y = canvas.height /2 ;
   // Place the monster somewhere on the canvas randomly
-  monster.x = 32 + (Math.random() * (canvas.width - 64));
-  monster.y = 32 + (Math.random() * (canvas.height - 64));
+  
+  monster1.x = 32 + (Math.random() * (canvas.width - 64));
+  monster1.y = 32 + (Math.random() * (canvas.height - 64));
+  
+  monster2.x = 32 + (Math.random() * (canvas.width - 64));
+  monster2.y = 32 + (Math.random() * (canvas.height - 64));
 };
+
 // Update game objects - change player position based on key pressed
 var update = function (modifier) {
   if (38 in keysDown) { // Player is holding up key
@@ -120,10 +127,10 @@ var render = function () {
     ctx.drawImage(heroImage, hero.x, hero.y);
   }
   if (monster1Ready) {
-    ctx.drawImage(monster1Image, monster.x, monster.y);
+    ctx.drawImage(monster1Image, monster1.x, monster1.y);
   }
   if (monster2Ready) {
-    ctx.drawImage(monster2Image, monster.x, monster.y);
+    ctx.drawImage(monster2Image, monster2.x, monster2.y);
   }
  
   // Display score and time
