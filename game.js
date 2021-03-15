@@ -114,6 +114,7 @@ if (39 in keysDown) { // Player is holding right key
     && monster1.y <= (hero.y + 32)
   ) {
     ++monstersCaught;
+  monster2Ready = false
 
   }
  if (
@@ -124,6 +125,7 @@ if (39 in keysDown) { // Player is holding right key
   ) {
 
     ++monstersCaught;
+  monster2Ready = false
   }
 
    if ((monster1Ready == false) && (monster2Ready == false)) {
