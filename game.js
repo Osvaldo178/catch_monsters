@@ -69,8 +69,8 @@ var reset = function () {
   hero.y = canvas.height /2 ;
   // Place the monster somewhere on the canvas randomly
 
-  monster1.x = 32 + (Math.random() * (canvas.width - 64));
-  monster1.y = 32 + (Math.random() * (canvas.height - 64));
+  monster1.x = 12 + (Math.random() * (canvas.width - 512));
+  monster1.y = 12 + (Math.random() * (canvas.height - 480));
 
   monster2.x = 32 + (Math.random() * (canvas.width - 64));
   monster2.y = 32 + (Math.random() * (canvas.height - 64));
@@ -128,7 +128,7 @@ if (39 in keysDown) { // Player is holding right key
   monster2Ready= false
   }
 
-  
+
 };
 // Draw everything on the canvas
 var render = function () {
