@@ -69,11 +69,13 @@ var reset = function () {
   hero.y = canvas.height /2 ;
   // Place the monster somewhere on the canvas randomly
 
-  monster1.x = 12 + (Math.random() * (canvas.width - 512));
-  monster1.y = 12 + (Math.random() * (canvas.height - 480));
+  monster1.x = 0 
+  monster1.y = 0 
 
-  monster2.x = 32 + (Math.random() * (canvas.width - 64));
-  monster2.y = 32 + (Math.random() * (canvas.height - 64));
+  monster2.x = 466 
+  monster2.y = 0 
+
+  
 };
 
 // Update game objects - change player position based on key pressed
@@ -128,6 +130,11 @@ if (39 in keysDown) { // Player is holding right key
   monster2Ready= false
   }
 
+if ((monster1Ready == false) && (monster2Ready == false)) {
+   monster1Ready = true;
+    monster2Ready = true;
+    reset();
+  }
 
 };
 // Draw everything on the canvas
